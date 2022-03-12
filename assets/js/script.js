@@ -232,6 +232,13 @@ const myModule = (() => {
             e.preventDefault();
             $("#errorMessage").html("<br />Correo electrónico requerido <br />");
             return false;
+        } else if ($("#items").html() == "") {
+            e.preventDefault();
+            swal("Carrito Vacío!", "No hay productos en tu carrito", "error", {
+                buttons: false,
+                timer: 3000
+            })
+            return false;
         } else if ($("#phone").val() == "") {
             e.preventDefault();
             $("#errorMessage").html("<br />Teléfono requerido <br />");
