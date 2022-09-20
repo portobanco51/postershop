@@ -2,10 +2,8 @@ const myModule = (() => {
 
     'use strict'
 
-    // Ready State START
     $(() => { fetchData() })
-    // Ready State END
-    // Llamada Asíncrona START
+    // Async call to fetch images from API
     const fetchData = async () => {
         try {
             const res = await fetch('./assets/js/products.json');
@@ -16,16 +14,14 @@ const myModule = (() => {
             console.log(error)
         }
     }
-    // Llamada Asíncrona END
 
     let cart = {};
 
-    // Function para guardar datos en JSON format
+    // Function to locally store data on browser
     const saveLocal = (id, value) => {
         localStorage.setItem(id, JSON.stringify(value))
     }
 
-    // Function para enseñar lista
     const productList = document.querySelector('#products-list')
     const printProducts = (data) => {
         const template = document.querySelector('#template-products').content;
@@ -42,7 +38,6 @@ const myModule = (() => {
         productList.appendChild(fragment)
     }
 
-    // Function para enseñar carrito
     const items = document.querySelector('#items');
     const printCart = () => {
 
@@ -72,7 +67,6 @@ const myModule = (() => {
         buttonsAction();
     };
 
-    // Function para enseñar opciones y total
     const footer = document.querySelector('#footer-cart');
     const printFooter = () => {
         footer.innerHTML = '';
@@ -120,6 +114,8 @@ const myModule = (() => {
                 })
         });
 
+        //SweatAlerts & jQuery
+
         const orderBtn = document.querySelector('#order-cart');
         orderBtn.addEventListener('click', () => {
             swal('Se procederá a completar el formulario de compra', '¿Desea continuar?', 'warning', {
@@ -141,7 +137,6 @@ const myModule = (() => {
         })
     };
 
-    // Function funcionalidad de botón en cards
     const buttonsData = (data) => {
 
         const buttons = document.querySelectorAll('.card button');
@@ -162,7 +157,6 @@ const myModule = (() => {
         });
     }
 
-    // Function funcionalidad de botones en cart
     const buttonsAction = () => {
 
         const addBtn = document.querySelectorAll('#items .btn-info');
@@ -219,7 +213,7 @@ const myModule = (() => {
 
     };
 
-    // Validación de formulario con peticiones AJAX & JQuery 
+    // Form validation con peticiones AJAX & JQuery 
     const form = document.forms['contactForm'];
     $('#contactForm').submit((e) => {
 
@@ -261,6 +255,8 @@ const myModule = (() => {
             localStorage.clear();
         };
 
+        // AJAX Validations with jQuery
+
         let url = "https://jsonplaceholder.typicode.com/users"
 
         let xhra = $.post(url, { username: $("#name").val(), email: $("#email").val(), phoneNumber: $("#phone").val() });
@@ -285,6 +281,7 @@ const myModule = (() => {
     });
 
     // Validación para siempre pintar el carrito guardado
+
     let localCart = JSON.parse(localStorage.getItem("cart"));
     if (localCart !== null) {
         cart = localCart;
